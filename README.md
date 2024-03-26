@@ -22,7 +22,7 @@ Add to your package.json
 
 ```json
 {
-  "prettier": "@ps73/eslint-config/prettier"
+  "prettier": "@ps73/eslint-config/prettier.json"
 }
 ```
 
