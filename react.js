@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['@supertray/eslint-config'],
+  extends: ['@ps73/eslint-config'],
 
   env: {
     browser: true,
