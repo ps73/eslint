@@ -4,6 +4,12 @@
   "description": "Simple yet opinionated eslint setup for my projects.",
   "main": "index.js",
   "type": "commonjs",
+  "files": [
+    "index.js",
+    "prettier.js",
+    "react.js",
+    "package.json"
+  ],
   "scripts": {
     "lint": "eslint --report-unused-disable-directives  --config ./.eslintrc.cjs --cache",
     "lint:fix": "npm run lint -- --fix",
