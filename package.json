@@ -1,6 +1,6 @@
 {
   "name": "@ps73/eslint-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple yet opinionated eslint setup for my projects.",
   "main": "index.js",
   "type": "commonjs",
