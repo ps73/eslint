@@ -4,7 +4,7 @@ module.exports = {
   extends: ['./index.js'],
 
   parserOptions: {
-    ecmaVersion: 2022,
+    ecmaVersion: 2023,
   },
 
   globals: {

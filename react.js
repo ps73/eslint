@@ -3,22 +3,24 @@ module.exports = {
 
   env: {
     browser: true,
-    es2022: true,
+    es2023: true,
   },
 
   ignorePatterns: ['*.html'],
 
   overrides: [
     {
-      parser: '@typescript-eslint/parser',
+      files: ['*.jsx'],
+      parser: '@babel/eslint-parser',
       parserOptions: {
-        project: './tsconfig.json',
-        sourceType: 'module',
-        ecmaVersion: 2022,
         ecmaFeatures: {
           jsx: true,
         },
+        ecmaVersion: 2023,
+        sourceType: 'module',
       },
+    },
+    {
       files: ['*.tsx', '*.jsx'],
       plugins: ['react', 'jsx-a11y', 'react-refresh'],
       extends: [
@@ -39,6 +41,9 @@ module.exports = {
         'import/resolver': {
           typescript: {},
         },
+      },
+      rules: {
+        'react-refresh/only-export-components': 'warn',
       },
     },
   ],

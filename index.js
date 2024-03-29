@@ -30,12 +30,16 @@ module.exports = {
       files: ['**/*.mjs', '**/*.js'],
       parserOptions: {
         sourceType: 'module',
-        ecmaVersion: 2022,
+        ecmaVersion: 2023,
       },
     },
 
     {
       files: ['**/*.cjs'],
+      parserOptions: {
+        sourceType: 'script',
+        ecmaVersion: 2023,
+      },
       globals: {
         module: true,
       },
@@ -51,7 +55,7 @@ module.exports = {
       parserOptions: {
         project: './tsconfig.json',
         sourceType: 'module',
-        ecmaVersion: 2022,
+        ecmaVersion: 2023,
         ecmaFeatures: {
           jsx: true,
         },

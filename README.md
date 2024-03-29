@@ -40,6 +40,8 @@ module.exports = {
 
 ### Inside VSCode
 
+Install [ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier Extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
+
 Add to .vscode/settings.json:
 
 ```jsonc
@@ -48,7 +50,6 @@ Add to .vscode/settings.json:
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit",
   },
   "eslint.enable": true,
   "eslint.options": { "reportUnusedDisableDirectives": "error" },
@@ -57,5 +58,6 @@ Add to .vscode/settings.json:
     "location": "separateLine",
     "commentStyle": "line",
   },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
 }
 ```
