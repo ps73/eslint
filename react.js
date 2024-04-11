@@ -3,7 +3,7 @@ module.exports = {
 
   env: {
     browser: true,
-    es2023: true,
+    es2022: true,
   },
 
   ignorePatterns: ['*.html'],
@@ -16,7 +16,6 @@ module.exports = {
         ecmaFeatures: {
           jsx: true,
         },
-        ecmaVersion: 2023,
         sourceType: 'module',
       },
     },
