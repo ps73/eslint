@@ -55,5 +55,8 @@
     "lint-staged": "^15.2.1",
     "typescript": "^5.4.2"
   },
-  "prettier": "./prettier.json"
+  "prettier": "./prettier.json",
+  "engines": {
+    "node": ">=20"
+  }
 }
