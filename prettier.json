@@ -7,12 +7,13 @@
   "bracketSpacing": true,
   "arrowParens": "always",
   "printWidth": 120,
-  "plugins": [
-    "@trivago/prettier-plugin-sort-imports"
-  ],
-  "importOrder": [
-    "<THIRD_PARTY_MODULES>",
-    "^[./]"
+  "plugins": ["@trivago/prettier-plugin-sort-imports"],
+  "importOrder": ["<THIRD_PARTY_MODULES>", "^[./]"],
+  "importOrderParserPlugins": [
+    "typescript",
+    "jsx",
+    "classProperties",
+    "[\"decorators\", { \"decoratorsBeforeExport\": true }]"
   ],
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true
