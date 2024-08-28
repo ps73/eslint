@@ -64,6 +64,18 @@ module.exports = {
 };
 ```
 
+### For React Native Projects
+
+To lint `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs` and `.cjs` files use the react configuration:
+
+```cjs
+module.exports = {
+  root: true,
+
+  extends: ['@ps73/eslint-config/react-native'],
+};
+```
+
 ### Inside VSCode
 
 Install [ESLint Extension](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint) and [Prettier Extension](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode).
