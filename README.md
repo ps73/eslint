@@ -8,14 +8,12 @@ npm install @ps73/eslint-config -D
 
 ## Usage
 
-To lint `.ts`, `.js`, `.mjs` and `.cjs` files add the following to your `.eslintrc.cjs` file:
+To lint `.ts`, `.js`, `.mjs` and `.cjs` files add the following to your `eslint.config.js` file:
 
-```cjs
-module.exports = {
-  root: true,
+```js
+import config from '@ps73/eslint-config';
 
-  extends: ['@ps73/eslint-config'],
-};
+export default config;
 ```
 
 Add to your package.json
@@ -28,53 +26,39 @@ Add to your package.json
 
 ### Other EcmaScript Versions
 
-By default the configuration uses ES2022. If you want to use a different version, add the following to your `.eslintrc.cjs` file:
+By default the configuration uses ES2022. If you want to use a different version, customize your `eslint.config.js` file:
 
-```cjs
-module.exports = {
-  root: true,
+```js
+import config from '@ps73/eslint-config';
 
-  extends: ['@ps73/eslint-config'],
-
-  parserOptions: {
-    ecmaVersion: 2023, // or 2022, 2021, 2020, 2019, ...
-  },
-
-  // when using react
-  overrides: [
-    {
-      files: ['*.tsx', '*.jsx'],
-      env: {
-        es2023: true, // or 2022, 2021, 2020, 2019, ...
-      },
+export default [
+  ...config,
+  {
+    languageOptions: {
+      ecmaVersion: 2023, // or 2022, 2021, 2020, 2019, ...
     },
-  ],
-};
+  },
+];
 ```
 
 ### For React Projects
 
 To lint `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs` and `.cjs` files use the react configuration:
 
-```cjs
-module.exports = {
-  root: true,
+```js
+import config from '@ps73/eslint-config/react';
 
-  extends: ['@ps73/eslint-config/react'],
-};
+export default config;
 ```
 
 ### For React Native Projects
 
-To lint `.ts`, `.tsx`, `.js`, `.jsx`, `.mjs` and `.cjs` files use the react configuration:
+**Note**: React Native support is currently not available with ESLint 9 due to `eslint-plugin-react-native` not supporting ESLint 9 yet. 
 
-```cjs
-module.exports = {
-  root: true,
-
-  extends: ['@ps73/eslint-config/react-native'],
-};
-```
+For React Native projects, you can:
+1. Use the React configuration as a base and manually configure React Native rules
+2. Wait for `eslint-plugin-react-native` to add ESLint 9 support
+3. Use `@eslint/compat` to wrap the plugin (requires installation: `npm install @eslint/compat`)
 
 ### Inside VSCode
 

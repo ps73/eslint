@@ -1,17 +1,56 @@
-module.exports = {
-  extends: ['@ps73/eslint-config'],
+import babelParser from '@babel/eslint-parser';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import react from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
 
-  env: {
-    browser: true,
-    es2022: true,
+import baseConfig from './index.js';
+
+export default [
+  ...baseConfig,
+
+  {
+    files: ['**/*.jsx', '**/*.tsx'],
+    ignores: ['*.html'],
+    languageOptions: {
+      globals: {
+        window: 'readonly',
+        document: 'readonly',
+        console: 'readonly',
+      },
+    },
+    plugins: {
+      react,
+      'jsx-a11y': jsxA11y,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      ...jsxA11y.configs.recommended.rules,
+      'react-refresh/only-export-components': 'warn',
+    },
+    settings: {
+      'react': {
+        version: 'detect',
+      },
+      'formComponents': ['Form'],
+      'linkComponents': [
+        { name: 'Link', linkAttribute: 'to' },
+        { name: 'NavLink', linkAttribute: 'to' },
+      ],
+      'import/resolver': {
+        typescript: {},
+      },
+    },
   },
 
-  ignorePatterns: ['*.html'],
-
-  overrides: [
-    {
-      files: ['*.jsx'],
-      parser: '@babel/eslint-parser',
+  {
+    files: ['**/*.jsx'],
+    languageOptions: {
+      parser: babelParser,
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -19,31 +58,5 @@ module.exports = {
         sourceType: 'module',
       },
     },
-    {
-      files: ['*.tsx', '*.jsx'],
-      plugins: ['react', 'jsx-a11y', 'react-refresh'],
-      extends: [
-        'plugin:react/recommended',
-        'plugin:react/jsx-runtime',
-        'plugin:react-hooks/recommended',
-        'plugin:jsx-a11y/recommended',
-      ],
-      settings: {
-        'react': {
-          version: 'detect',
-        },
-        'formComponents': ['Form'],
-        'linkComponents': [
-          { name: 'Link', linkAttribute: 'to' },
-          { name: 'NavLink', linkAttribute: 'to' },
-        ],
-        'import/resolver': {
-          typescript: {},
-        },
-      },
-      rules: {
-        'react-refresh/only-export-components': 'warn',
-      },
-    },
-  ],
-};
+  },
+];

@@ -4,18 +4,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is `@ps73/eslint-config`, a shareable ESLint configuration package that provides opinionated linting rules for JavaScript, TypeScript, React, and React Native projects. The package is published to npm and used across multiple projects.
+This is `@ps73/eslint-config`, a shareable ESLint configuration package that provides opinionated linting rules for JavaScript, TypeScript, React, and React Native projects. The package is published to npm and uses ESLint 9's flat config format.
 
 ## Architecture
 
 The configuration is structured as follows:
 
-- **`index.js`** - Core ESLint configuration with TypeScript support
+- **`index.js`** - Core ESLint configuration with TypeScript support (ESM flat config)
 - **`react.js`** - Extends core config with React-specific rules  
-- **`react-native.js`** - Extends React config for React Native projects
+- **`react-native.js`** - ~~Removed due to ESLint 9 compatibility issues~~
 - **`prettier.json`** - Prettier configuration with import sorting
 
-The configurations use a layered approach where each specialization extends the base configuration and adds environment-specific rules.
+The configurations use ESLint 9's flat config format and are ES modules. Each specialization imports and extends the base configuration.
 
 ## Commands
 
@@ -36,10 +36,11 @@ The configurations use a layered approach where each specialization extends the 
 Uses conventional commits with custom scopes: `core`, `react`, `prettier`
 
 ### ESLint Configuration Structure
-- Base config supports ES2022, CommonJS/ESM modules
-- TypeScript override requires `tsconfig.json` in target projects
+- Uses ESLint 9 flat config format (array of config objects)
+- Base config supports ES2022, CommonJS/ESM modules  
+- TypeScript config uses typescript-eslint v8 and requires `tsconfig.json` in target projects
 - React config adds JSX, accessibility, and React-specific rules
-- React Native config disables browser globals and adds RN environment
+- React Native config temporarily removed due to `eslint-plugin-react-native` not supporting ESLint 9
 
 ### Prettier Integration
 - Import sorting via `@trivago/prettier-plugin-sort-imports`

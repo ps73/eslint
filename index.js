@@ -1,62 +1,69 @@
-module.exports = {
-  root: true,
+import js from '@eslint/js';
+import prettier from 'eslint-plugin-prettier';
+import tseslint from 'typescript-eslint';
 
-  ignorePatterns: ['dist', 'node_modules', '.temp'],
-  extends: ['eslint:recommended'],
-  plugins: ['prettier'],
+export default [
+  js.configs.recommended,
 
-  parserOptions: {
-    ecmaVersion: 2022,
+  {
+    ignores: ['dist', 'node_modules', '.temp'],
   },
 
-  settings: {},
-
-  globals: {},
-
-  rules: {
-    'prettier/prettier': 'error',
-    'comma-dangle': ['error', 'always-multiline'],
-    'semi': ['error', 'always'],
-    'quotes': ['error', 'single'],
-    'object-curly-spacing': ['error', 'always'],
-    'max-len': [
-      'error',
-      {
-        code: 120,
-        ignoreComments: true,
-        ignoreStrings: true,
-        ignoreTemplateLiterals: true,
-      },
-    ],
-    'no-console': ['warn'],
-    'array-callback-return': 'error',
-  },
-
-  overrides: [
-    {
-      files: ['**/*.mjs', '**/*.js'],
-      parserOptions: {
-        sourceType: 'module',
-      },
+  {
+    plugins: {
+      prettier,
     },
+    rules: {
+      'prettier/prettier': 'error',
+      'comma-dangle': ['error', 'always-multiline'],
+      'semi': ['error', 'always'],
+      'quotes': ['error', 'single'],
+      'object-curly-spacing': ['error', 'always'],
+      'max-len': [
+        'error',
+        {
+          code: 120,
+          ignoreComments: true,
+          ignoreStrings: true,
+          ignoreTemplateLiterals: true,
+        },
+      ],
+      'no-console': ['warn'],
+      'array-callback-return': 'error',
+    },
+  },
 
-    {
-      files: ['**/*.cjs'],
-      parserOptions: {
-        sourceType: 'script',
-      },
+  {
+    files: ['**/*.mjs', '**/*.js'],
+    languageOptions: {
+      sourceType: 'module',
+      ecmaVersion: 2022,
+    },
+  },
+
+  {
+    files: ['**/*.cjs'],
+    languageOptions: {
+      sourceType: 'script',
+      ecmaVersion: 2022,
       globals: {
         module: true,
       },
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off',
-      },
     },
+    rules: {
+      '@typescript-eslint/no-var-requires': 'off',
+    },
+  },
 
-    {
-      files: ['**/*.ts', '**/*.tsx'],
+  ...tseslint.configs.recommended.map((config) => ({
+    ...config,
+    files: ['**/*.ts', '**/*.tsx'],
+  })),
 
-      parser: '@typescript-eslint/parser',
+  {
+    files: ['**/*.ts', '**/*.tsx'],
+    languageOptions: {
+      parser: tseslint.parser,
       parserOptions: {
         project: './tsconfig.json',
         sourceType: 'module',
@@ -64,21 +71,18 @@ module.exports = {
           jsx: true,
         },
       },
-
-      extends: ['plugin:@typescript-eslint/recommended'],
-
-      rules: {
-        '@typescript-eslint/consistent-type-imports': [
-          'error',
-          {
-            disallowTypeAnnotations: false,
-            fixStyle: 'separate-type-imports',
-            prefer: 'type-imports',
-          },
-        ],
-        'no-unused-vars': 'off',
-        '@typescript-eslint/no-unused-vars': ['error'],
-      },
     },
-  ],
-};
+    rules: {
+      '@typescript-eslint/consistent-type-imports': [
+        'error',
+        {
+          disallowTypeAnnotations: false,
+          fixStyle: 'separate-type-imports',
+          prefer: 'type-imports',
+        },
+      ],
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['error'],
+    },
+  },
+];
